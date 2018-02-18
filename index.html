@@ -8,14 +8,28 @@
   <title>Flash!</title>
 </head>
 <body>
-  <h1>Flashcard App!</h1>
-  <ul id="cardList">
-    <li v-for="card in cards" class="card" v-on:click="toggleCard(card)">
-      <p v-show="!card.active" class="front">{{card.question}}</p>
-      <p v-show="card.active" class="back">{{card.answer}}</p>
-    </li>
-  </ul>
-  
+  <div id="cardList">
+
+    <h1>Flashcard App!</h1>
+
+    <label for="front">Front
+      <input v-model="cardFront" type="text" id="front">
+    </label>
+    <label for="back">Back
+      <input v-model="cardBack" type="text" id="back">
+    </label>
+    <button v-on:click="addNew">Add a New Card</button>
+
+    <ul>
+      <li v-for="(card, index) in cards" class="card" v-on:click="toggleCard(card)">
+        <span v-on:click="cards.splice(index, 1)">X</span>
+        <p v-show="!card.active" class="front">{{card.front}}</p>
+        <p v-show="card.active" class="back">{{card.back}}</p>
+      </li>
+    </ul>
+
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
   <script src="app.js"></script>
 </body>
